@@ -3,6 +3,12 @@ class Person < ActiveRecord::Base
   has_many :checkins
   has_many :user_person_joins
   has_many :users, through: :user_person_joins
+  has_many :leagues_people
+  has_many :leagues, through: :leagues_people
+
+  def leagues_for_event(event)
+    leagues.for_event(event)
+  end
 
   def up_by(event=nil)
     return attributes['up_by'] unless event

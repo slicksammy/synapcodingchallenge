@@ -1,13 +1,25 @@
 %h2
   #{@event.name}
-- @event.people.each_with_index do |person, index|
+- @sorted_people.each_with_index do |person, index|
   %table
     %tr
       %td{class: 'ordinal'}= index
       %td{class: "text-left"}=link_to(person.name, person_path(person.id))
+      %td
+        -@sorted_people_leauges[person.id].each do |league|
+          %a= link_to(league.name, league_path(league.id))
       %td{class: "text-left weight"}=person.up_by(@event)
   %br
 %br
+%br
+%h3
+  Leagues
+- @leagues.each_with_index do |league, index|
+  %table
+    %tr
+      %td{class: 'ordinal'}= index
+      %td{class: "text-left"}=link_to(league.name, league_path(league.id))
+  %br
 %br
 %br
 %br

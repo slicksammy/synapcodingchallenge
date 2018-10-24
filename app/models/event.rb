@@ -3,4 +3,5 @@ class Event < ActiveRecord::Base
 
   has_many :checkins
   has_many :people, -> { distinct }, through: :checkins
+  has_many :leagues
 end

@@ -1,0 +1,18 @@
+%h1{class: 'text-center'}= "List of leagues:"
+%div{class: 'table-container'}
+  %table{border: 0, class: 'table table-condensed borderless'}
+    %tr
+      %th{class: 'ordinal'}
+      %th{class: 'text-left person-name'} NAME
+    - @leagues.each_with_index do |league, index|
+      / TODO: add winner here
+      %tr
+        %td{class: 'ordinal'}= index
+        %td{class: "text-left weight"}=link_to(league.name, league_path(league.id))
+
+/ %br
+/ %br
+/ %br
+/ %br
+/ %br
+/ = link_to('CURRENT EVENT', people_path)
