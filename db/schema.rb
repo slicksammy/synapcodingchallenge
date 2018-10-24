@@ -37,14 +37,6 @@ ActiveRecord::Schema.define(version: 20181024162254) do
     t.string   "tagline"
   end
 
-  create_table "events_leagues", id: false, force: true do |t|
-    t.integer "league_id", null: false
-    t.integer "event_id",  null: false
-  end
-
-  add_index "events_leagues", ["event_id"], name: "index_events_leagues_on_event_id", using: :btree
-  add_index "events_leagues", ["league_id"], name: "index_events_leagues_on_league_id", using: :btree
-
   create_table "leagues", force: true do |t|
     t.integer  "event_id"
     t.string   "name"
