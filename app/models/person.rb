@@ -18,9 +18,17 @@ class Person < ActiveRecord::Base
     last_checkin == first_checkin ? nil : last_checkin.weight - first_checkin.weight
   end
 
-  def percentage_change
-    return unless up_by
-    @percentage_change ||= starting_weight ?  up_by.to_f / starting_weight * 100 : nil
+  def up_by_percentage(event=nil)
+    return attributes['up_by'] unless event
+    checkins_from_event = event.checkins.where(person: self).order(:created_at)
+    first_checkin = checkins_from_event.first
+    last_checkin = checkins_from_event.last
+    last_checkin == first_checkin ? nil : (last_checkin.weight - first_checkin.weight).to_f / first_checkin.weight.to_f * 100.to_f
+  end
+
+  def percentage_change(event: nil)
+    # return unless up_by
+    @percentage_change ||= starting_weight ?  up_by(event).to_f / starting_weight * 100 : nil
   end
 
   def checkin_diffs
