@@ -1,11 +1,12 @@
 %h2
   #{@league.name}
-- @league.people.each_with_index do |person, index|
+- @sorted_people.each_with_index do |person, index|
   %table
     %tr
       %td{class: 'ordinal'}= index
       %td{class: "text-left"}=link_to(person.name, person_path(person.id))
-      %td{class: "text-left weight"}=person.up_by(@event)
+      %td=person.up_by(@event) ? "#{person.up_by(@event)} lbs" : nil
+      %td=person.up_by_percentage(@event) ? "#{person.up_by_percentage(@event).round(2)} %" : nil
   %br
 %br
 %br

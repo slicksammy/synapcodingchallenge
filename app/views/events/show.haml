@@ -8,7 +8,8 @@
       %td
         -@sorted_people_leauges[person.id].each do |league|
           %a= link_to(league.name, league_path(league.id))
-      %td{class: "text-left weight"}=person.up_by(@event)
+      %td=person.up_by(@event) ? "#{person.up_by(@event)} lbs" : nil
+      %td=person.up_by_percentage(@event) ? "#{person.up_by_percentage(@event).round(2)} %" : nil
   %br
 %br
 %br
